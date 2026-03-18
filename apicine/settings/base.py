@@ -41,6 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # Apps 
+    'accounts.apps.AccountsConfig',
+    'screening.apps.ScreeningConfig',
+    'theater.apps.TheaterConfig'
 ]
 
 MIDDLEWARE = [
