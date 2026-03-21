@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
     # Framework
     'rest_framework',
     'rest_framework_simplejwt'
@@ -147,7 +148,10 @@ REST_FRAMEWORK = {
 }
 
 SIMPLE_JWT = {
+    # expires in 30 min
     'ACCESS_TOKEN_LIFETIME': timedelta(minutes=30),
+    # refresh expires in 1 day
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
+    # renews a new token
     'ROTATE_REFRESH_TOKENS': True,
 }
