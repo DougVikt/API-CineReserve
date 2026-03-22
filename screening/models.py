@@ -1,6 +1,6 @@
 from django.db import models
 from django.utils import timezone 
-# extra imports 
+# others imports 
 from datetime import timedelta
 
 
@@ -89,13 +89,13 @@ class SeatReservation(models.Model):
     class Status(models.TextChoices):
         AVAILABLE = 'available' , 'Disponivel'
         RESERVED = 'reserved' , 'Reservado'
-        PURCHARSED = 'purchased' , 'Comprado'
+        PURCHASED = 'purchased' , 'Comprado'
         
     session = models.ForeignKey(Session, on_delete=models.CASCADE, related_name='reservations')
     seat = models.ForeignKey("theater.Seat", on_delete=models.CASCADE , related_name='reservations')
     user = models.ForeignKey("accounts.User", on_delete=models.SET_NULL ,null=True , blank=True ,related_name='reservations')
     status = models.CharField(max_length=50 ,choices=Status.choices,default=Status.AVAILABLE )
-    expires_at = models.DateField(null=True ,blank=True)
+    expires_at = models.DateTimeField(null=True ,blank=True)
     
     class Meta:
         verbose_name = 'Reserva'
