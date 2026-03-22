@@ -19,15 +19,40 @@ from django.urls import path ,include
 from django.conf import settings
 from django.conf.urls.static import static
 # framework imports
+from drf_yasg.views import get_schema_view
+from drf_yasg import openapi
+from rest_framework.permissions import AllowAny
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
 )
 
+
+# Configure the documentation with the API name, version, and description.
+schema_view = get_schema_view(
+    openapi.Info(
+        title='CineReserve API',
+        default_version='v1',
+        description='API para reserva de ingressos de cinema',
+    ),
+    public=True,
+    permission_classes=[AllowAny],
+    authentication_classes=[],
+)
+
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('apiv1/auth/', include('accounts.urls')),
+    path('apiv1/', include('screening.urls')),
     path('apiv1/token/' , TokenObtainPairView.as_view() , name='token_obtain_pair'),
     path('apiv1/token/refresh/' , TokenRefreshView.as_view() , name='token_refresh'),
+    # documentation
+    path('swagger/', schema_view.with_ui('swagger', cache_timeout=0), name='swagger-ui'),
+    path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='redoc'),
+
     
 ] + static(settings.MEDIA_URL , document_root=settings.MEDIA_ROOT)
+
+
+
