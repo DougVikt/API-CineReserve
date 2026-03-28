@@ -45,6 +45,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('apiv1/auth/', include('accounts.urls')),
     path('apiv1/', include('screening.urls')),
+    path('apiv1/payments/', include('payment.urls')),
     path('apiv1/token/' , TokenObtainPairView.as_view() , name='token_obtain_pair'),
     path('apiv1/token/refresh/' , TokenRefreshView.as_view() , name='token_refresh'),
     # documentation
